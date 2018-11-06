@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+
+<form method="post" th:object="${newBook}">
+    <label for="title">Title: </label><input id="title" type="text" th:field="*{title}">
+    <label for="published">Published: </label><input id="published" type="text" th:field="*{publishedAt}">
+    <input type="submit" value="Add" />
+</form>
+
+<body>
+    <table>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.id}"></td>
+            <td><a th:href="@{'http://localhost:8080/books/' + ${book.id}}" th:text="${book.title}"></a></td>
+            <td th:text="${book.publishedAt}"></td>
+        </tr>
+    </table>
+<hr />
+    <h2 th:if="${currentBook.id != null}">Current book <span th:text="${currentBook.title}"></span></h2>
+</body>
+</html>
